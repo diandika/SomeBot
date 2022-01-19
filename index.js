@@ -1,4 +1,5 @@
 'use strict';
+require('dotenv').config();
 
 const
     express = require('express'),
@@ -14,6 +15,9 @@ app.post('/webhook', (req, res) => {
         body.entry.forEach(function (entry) {
             let webhook_event = entry.messaging[0];
             console.log(webhook_event);
+
+            let psid = webhook_event.sender.id;
+            console.log("Sender PSID:", psid);
         });
 
         res.status(200).send('EVENT_RECEIVED');
@@ -23,7 +27,8 @@ app.post('/webhook', (req, res) => {
 });
 
 app.get('/webhook', (req, res) => {
-    let VERIFY_TOKEN = "TOKEN";
+    const VERIFY_TOKEN = env.process.VERIFY_TOKEN;
+    const ACESS_TOKEN = env.process.ACESS_TOKEN;
 
     let mode = req.query['hub.mode'];
     let token = req.query['hub.verify_token'];
@@ -38,4 +43,16 @@ app.get('/webhook', (req, res) => {
         }
     }
 
-})
+});
+
+function handleMessage(psid, message){
+
+}
+
+function handlePostback(psid, postback){
+
+}
+
+function callSendAPI(psid, res){
+
+}
