@@ -99,6 +99,17 @@ function handleMessage(psid, message){
 
 function handlePostback(psid, postback){
 
+    let response;
+
+    let payload = postback.payload;
+
+    if (payload === 'yes'){
+        response = {"text": "Great!"};
+    } else if (payload === 'no'){
+        response = {"text": "Try again"};
+    }
+
+    callSendAPI(psid, response);
 }
 
 function callSendAPI(psid, res){
