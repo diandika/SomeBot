@@ -62,9 +62,9 @@ function handleMessage(psid, message){
         response = {
             "text": `You sent the message: "${message.text}". Now send me an image!`
         }
-    } else if (message.attachment){
+    } else if (message.attachments){
 
-        let attachment_url = message.attachment[0].payload.url;
+        let attachment_url = message.attachments[0].payload.url;
 
         response = {
             "attachment": {
