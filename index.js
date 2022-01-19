@@ -21,9 +21,9 @@ app.post('/webhook', (req, res) => {
             console.log("Sender PSID:", psid);
 
             if (webhook_event.message) {
-                handleMessage(sender_psid, webhook_event.message);        
+                handleMessage(psid, webhook_event.message);        
             } else if (webhook_event.postback) {
-                handlePostback(sender_psid, webhook_event.postback);
+                handlePostback(psid, webhook_event.postback);
             }
         });
 
@@ -65,7 +65,7 @@ function handleMessage(psid, message){
     }  
     
     // Sends the response message
-    callSendAPI(sender_psid, response);
+    callSendAPI(psid, response);
 }
 
 function handlePostback(psid, postback){
@@ -75,7 +75,7 @@ function handlePostback(psid, postback){
 function callSendAPI(psid, res){
     let request_body = {
         "recipient": {
-            "id": sender_psid
+            "id": psid
         },
         "message": response
     }
